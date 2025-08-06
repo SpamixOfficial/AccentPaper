@@ -1,17 +1,11 @@
-//
-//  AccentPaperApp.swift
-//  AccentPaper
-//
-//  Created by Alexander on 2025-08-06.
-//
-
 import SwiftUI
 
-@main
-struct AccentPaperApp: App {
+@available(macOS 13.0, *)
+@main struct AccentPaperApp: App {
+    @AppStorage("showMenuBarExtra") private var showMenuBarExtra = true
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        MenuBarExtra("AccentPaperControls", systemImage: "rainbow") {
+            AppBar()
         }
     }
 }

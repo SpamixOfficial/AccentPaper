@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		11A7D2ED2E43AD580097399C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A7D2EC2E43AD580097399C /* AppKit.framework */; };
-		11A7D2EF2E43AD660097399C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A7D2EE2E43AD660097399C /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +60,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				11A7D2ED2E43AD580097399C /* AppKit.framework in Frameworks */,
-				11A7D2EF2E43AD660097399C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

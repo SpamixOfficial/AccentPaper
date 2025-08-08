@@ -1,72 +1,130 @@
 import AppKit
 import Combine
-
-enum AccentColorTag : Int64 {
-    case Red = 0
-    case Orange = 1
-    case Yellow = 2
-    case Green = 3
-    case Blue = 4
-    case Purple = 5
-    case Pink = 6
-    case Multicolor = 7
-}
+import CoreGraphics
 
 class AccentBackend: ObservableObject {
-    private var activeScreen: AccentScreen = AccentScreen(inselected: true, inscreen: NSScreen.main)
+    @Published var activeScreen: AccentScreen = AccentScreen(inselected: true, inscreen: NSScreen.main)
     @Published var screens: [AccentScreen] = []
     var timer = Timer()
     var manually_set = false
     
+    var desktop_uri: URL?
+    var is_image: Bool = true;
+    var wallpaper_plist: URL
+    
     func collectScreens() {
         let raw_screens = NSScreen.screens
         screens = raw_screens.map { AccentScreen(inselected: $0.hash == activeScreen.id, inscreen: $0) }
-        print("screens collected")
     }
     
     func setActiveScreen() {
         if let currentScreen = NSScreen.main {
-            print("screen was valid")
             if currentScreen != activeScreen.screen {
-                print("new screen - set!")
                 activeScreen = AccentScreen(inselected: true, inscreen: currentScreen)
+                let i = screens.firstIndex(where:  { $0.id == activeScreen.id});
+                screens[i!].selected = true
             }
         }
     }
     
     func setActiveScreenFromTag(_ t: Int?) {
-        print("set!!")
         activeScreen = screens.first(where: { $0.id == t}) ?? AccentScreen(inselected: true, inscreen: NSScreen.main)
         activeScreen.selected = true
     }
+    
+    func getWallpaper() {
+        let decoder = PropertyListDecoder()
+        
+        guard let raw_data = try? Data(contentsOf: wallpaper_plist) else {
+            is_image = false
+            return
+        }
+        let plist_data = try! decoder.decode(WallpaperProperties.self, from: raw_data)
+        
+        let obj: Wallpaper.WallpaperConfig?
+        
+        if screens.count > 1 && plist_data.AllSpacesAndDisplays.Desktop == nil && !plist_data.Displays.isEmpty {
+            guard let display = plist_data.Displays[activeScreen.d_id ?? ""]?.Desktop else {
+                is_image = false
+                return
+            }
+            
+            obj = display.Content.Choices.first
+            
+        } else {
+            obj = plist_data.AllSpacesAndDisplays.Desktop?.Content.Choices.first
+        }
+        
+        if let o = obj {
+            if o.Files.first?.relative != nil {
+                is_image = o.Provider == "com.apple.wallpaper.choice.image"
+                desktop_uri = URL(fileURLWithPath: o.Files.first?.relative ?? "")
+                return
+            }
+        }
+        is_image = false
+    }
+    
+    
+    func getProminentColorFromWallpaper() {
+        if desktop_uri == nil {
+            return
+        }
+        
+        let uri: URL = desktop_uri!
+        print(uri)
+    }
+    
     
     func setAccentColor(color: AccentColorTag) {
         AccentHelper.setUserAccentColorUser(color.rawValue, shouldRet: 1)
     }
     
+    
     func startJob() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
-            print("job!!")
             self?.collectScreens()
             if (self?.manually_set != nil && !(self!.manually_set)) {
                 self?.setActiveScreen()
             }
+            
+            self?.getWallpaper()
+            self?.getProminentColorFromWallpaper()
         })
     }
     
     func stopJob() {
         timer.invalidate()
     }
+    
+    init() {
+        wallpaper_plist = URL.applicationSupportDirectory.appending(path: "com.apple.wallpaper/Store/Index.plist")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.startJob()
+        }
+    }
 }
 
 struct AccentScreen: Identifiable {
     var selected = false
+    var selectable = true
     var screen: NSScreen?
     var id: Int?
+    var d_id: String?
     
     init(inselected: Bool, inscreen: NSScreen?) {
         selected = inselected
         screen = inscreen
         id = inscreen?.hash
+        if let num = inscreen?.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID {
+            guard let ref = CGDisplayCreateUUIDFromDisplayID(num)?.takeRetainedValue() else {
+                selectable = false
+                return
+            }
+            
+            d_id = CFUUIDCreateString(nil, ref) as String;
+        } else {
+            selectable = false
+        }
     }
 }

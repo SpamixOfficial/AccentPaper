@@ -5,7 +5,7 @@ struct AppBar: View {
     @State private var syncScreenAutomatically = true
     @State private var chosenScreenHash: Int? = 0
     @StateObject private var backend = AccentBackend()
-    
+
     var body: some View {
         VStack {
             Toggle(isOn: $syncAutomatically) {
@@ -14,21 +14,28 @@ struct AppBar: View {
             Toggle(isOn: $syncScreenAutomatically) {
                 Text("Choose screen automatically")
             }.toggleStyle(.automatic)
-                .onChange(of: syncScreenAutomatically, {backend.manually_set = syncAutomatically})
+                .onChange(
+                    of: syncScreenAutomatically,
+                    { backend.manually_set = syncAutomatically }
+                )
             Picker(selection: $chosenScreenHash, label: Text("Chosen Screen")) {
-                ForEach(backend.screens) {screen in
-                    Text(screen.screen?.localizedName ?? "Generic Display").tag(screen.id)
+                ForEach(backend.screens) { screen in
+                    Text(screen.screen?.localizedName ?? "Generic Display").tag(
+                        screen.id
+                    )
                 }
-            }.onChange(of: chosenScreenHash) { backend.setActiveScreenFromTag(chosenScreenHash) }.disabled(syncScreenAutomatically)
+            }.onChange(of: chosenScreenHash) {
+                backend.setActiveScreenFromTag(chosenScreenHash)
+            }.onReceive(backend.$activeScreen) { x in
+                chosenScreenHash = x.id
+            }.disabled(syncScreenAutomatically)
             Divider()
             Button("Sync now") {
-                
+
             }.keyboardShortcut("S", modifiers: [.shift])
             Button("Quit") {
                 NSApp.terminate(nil)
             }.keyboardShortcut("Q", modifiers: [.command, .shift])
-        }.onAppear {
-            backend.startJob()
         }
     }
 }

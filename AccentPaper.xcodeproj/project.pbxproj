@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11A7D2ED2E43AD580097399C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A7D2EC2E43AD580097399C /* AppKit.framework */; };
+		5354BB74F9F53CE751F91D2A /* Pods_AccentPaper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1136A6DB623D4042FDA35FBE /* Pods_AccentPaper.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,27 +29,36 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1136A6DB623D4042FDA35FBE /* Pods_AccentPaper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AccentPaper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1158FD4E2E4397EB00D15218 /* AccentPaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccentPaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1158FD5C2E4397EC00D15218 /* AccentPaperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccentPaperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1158FD662E4397EC00D15218 /* AccentPaperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccentPaperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11A7D2DE2E43A4130097399C /* UserActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserActivity.framework; path = ../../../../../../System/Library/PrivateFrameworks/UserActivity.framework; sourceTree = "<group>"; };
 		11A7D2EC2E43AD580097399C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		11A7D2EE2E43AD660097399C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6E6E17EA36C4666A23C179E0 /* Pods-AccentPaper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccentPaper.release.xcconfig"; path = "Target Support Files/Pods-AccentPaper/Pods-AccentPaper.release.xcconfig"; sourceTree = "<group>"; };
+		E5FB6A88C95D7F1004D41CBD /* Pods-AccentPaper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccentPaper.debug.xcconfig"; path = "Target Support Files/Pods-AccentPaper/Pods-AccentPaper.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1158FD502E4397EB00D15218 /* AccentPaper */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = AccentPaper;
 			sourceTree = "<group>";
 		};
 		1158FD5F2E4397EC00D15218 /* AccentPaperTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = AccentPaperTests;
 			sourceTree = "<group>";
 		};
 		1158FD692E4397EC00D15218 /* AccentPaperUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = AccentPaperUITests;
 			sourceTree = "<group>";
 		};
@@ -60,6 +70,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11A7D2ED2E43AD580097399C /* AppKit.framework in Frameworks */,
+				5354BB74F9F53CE751F91D2A /* Pods_AccentPaper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +99,7 @@
 				1158FD692E4397EC00D15218 /* AccentPaperUITests */,
 				11A7D2DD2E43A4130097399C /* Frameworks */,
 				1158FD4F2E4397EB00D15218 /* Products */,
+				DCACBE3B4470222FD0AF4FA9 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,8 +119,18 @@
 				11A7D2EE2E43AD660097399C /* Foundation.framework */,
 				11A7D2EC2E43AD580097399C /* AppKit.framework */,
 				11A7D2DE2E43A4130097399C /* UserActivity.framework */,
+				1136A6DB623D4042FDA35FBE /* Pods_AccentPaper.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCACBE3B4470222FD0AF4FA9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E5FB6A88C95D7F1004D41CBD /* Pods-AccentPaper.debug.xcconfig */,
+				6E6E17EA36C4666A23C179E0 /* Pods-AccentPaper.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,9 +140,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1158FD702E4397EC00D15218 /* Build configuration list for PBXNativeTarget "AccentPaper" */;
 			buildPhases = (
+				08F31B0560A63FB6154B8174 /* [CP] Check Pods Manifest.lock */,
 				1158FD4A2E4397EB00D15218 /* Sources */,
 				1158FD4B2E4397EB00D15218 /* Frameworks */,
 				1158FD4C2E4397EB00D15218 /* Resources */,
+				DE3AF7B9B428B262DF831289 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,8 +154,6 @@
 				1158FD502E4397EB00D15218 /* AccentPaper */,
 			);
 			name = AccentPaper;
-			packageProductDependencies = (
-			);
 			productName = AccentPaper;
 			productReference = 1158FD4E2E4397EB00D15218 /* AccentPaper.app */;
 			productType = "com.apple.product-type.application";
@@ -153,8 +175,6 @@
 				1158FD5F2E4397EC00D15218 /* AccentPaperTests */,
 			);
 			name = AccentPaperTests;
-			packageProductDependencies = (
-			);
 			productName = AccentPaperTests;
 			productReference = 1158FD5C2E4397EC00D15218 /* AccentPaperTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -176,8 +196,6 @@
 				1158FD692E4397EC00D15218 /* AccentPaperUITests */,
 			);
 			name = AccentPaperUITests;
-			packageProductDependencies = (
-			);
 			productName = AccentPaperUITests;
 			productReference = 1158FD662E4397EC00D15218 /* AccentPaperUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -250,6 +268,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08F31B0560A63FB6154B8174 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AccentPaper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE3AF7B9B428B262DF831289 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AccentPaper/Pods-AccentPaper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AccentPaper/Pods-AccentPaper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AccentPaper/Pods-AccentPaper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1158FD4A2E4397EB00D15218 /* Sources */ = {
@@ -411,6 +471,7 @@
 		};
 		1158FD712E4397EC00D15218 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5FB6A88C95D7F1004D41CBD /* Pods-AccentPaper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -423,6 +484,7 @@
 				DEVELOPMENT_TEAM = 7MDXAWN329;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -447,6 +509,7 @@
 		};
 		1158FD722E4397EC00D15218 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E6E17EA36C4666A23C179E0 /* Pods-AccentPaper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -459,6 +522,7 @@
 				DEVELOPMENT_TEAM = 7MDXAWN329;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

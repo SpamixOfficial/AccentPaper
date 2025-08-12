@@ -43,22 +43,16 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1158FD502E4397EB00D15218 /* AccentPaper */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = AccentPaper;
 			sourceTree = "<group>";
 		};
 		1158FD5F2E4397EC00D15218 /* AccentPaperTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = AccentPaperTests;
 			sourceTree = "<group>";
 		};
 		1158FD692E4397EC00D15218 /* AccentPaperUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = AccentPaperUITests;
 			sourceTree = "<group>";
 		};
@@ -300,9 +294,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AccentPaper/Pods-AccentPaper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AccentPaper/Pods-AccentPaper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

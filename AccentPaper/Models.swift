@@ -1,6 +1,7 @@
 import AppKit
 
-enum AccentColorTag : Int64 {
+enum AccentColorTag: Int64 {
+    case Graphite = -1
     case Red = 0
     case Orange = 1
     case Yellow = 2
@@ -9,52 +10,60 @@ enum AccentColorTag : Int64 {
     case Purple = 5
     case Pink = 6
     case Multicolor = 7
-    
+
     var colorComponent: NSColor {
         switch self {
+        case .Graphite:
+            return NSColor(140, 140, 140)
         case .Red:
-            return colorFromRgb(254, 82, 87)
+            return NSColor(254, 82, 87)
         case .Orange:
-            return colorFromRgb(247, 130, 27)
+            return NSColor(247, 130, 27)
         case .Yellow:
-            return colorFromRgb(255, 199, 0)
+            return NSColor(255, 199, 0)
         case .Green:
-            return colorFromRgb(97, 186, 70)
+            return NSColor(97, 186, 70)
         case .Blue:
-            return colorFromRgb(0, 122, 255)
+            return NSColor(0, 122, 255)
         case .Purple:
-            return colorFromRgb(165, 79, 167)
+            return NSColor(165, 79, 167)
         case .Pink:
-            return colorFromRgb(247, 79, 158)
+            return NSColor(247, 79, 158)
         case .Multicolor:
-            return colorFromRgb(0, 122, 255)
+            return NSColor(0, 122, 255)
         }
     }
 }
 
+let AccentColors = [
+    AccentColorTag.Blue, AccentColorTag.Green, AccentColorTag.Red,
+    AccentColorTag.Pink, AccentColorTag.Orange, AccentColorTag.Purple,
+    AccentColorTag.Yellow, AccentColorTag.Graphite
+]
+
 struct WallpaperProperties: Codable {
     var AllSpacesAndDisplays: WallpaperDeclaration
-    var Displays: [String : WallpaperDeclaration]
+    var Displays: [String: WallpaperDeclaration]
 }
 
-struct WallpaperDeclaration : Codable {
+struct WallpaperDeclaration: Codable {
     var Desktop: Wallpaper?
     var Idle: Wallpaper?
 }
 
-struct Wallpaper : Codable {
-    struct WallpaperContent : Codable {
+struct Wallpaper: Codable {
+    struct WallpaperContent: Codable {
         var Choices: [WallpaperConfig]
     }
-    
-    struct WallpaperConfig : Codable {
+
+    struct WallpaperConfig: Codable {
         var Files: [WallpaperFile]
         var Provider: String
     }
-    
-    struct WallpaperFile : Codable {
+
+    struct WallpaperFile: Codable {
         var relative: String
     }
-    
+
     var Content: WallpaperContent
 }

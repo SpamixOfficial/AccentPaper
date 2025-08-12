@@ -10,13 +10,20 @@ struct AppBar: View {
         VStack {
             Toggle(isOn: $syncAutomatically) {
                 Text("Sync to wallpaper automatically")
-            }.toggleStyle(.automatic)
+            }.toggleStyle(.automatic).onChange(
+                of: syncAutomatically,
+                {
+                    syncAutomatically ? backend.startJob() : backend.stopJob()
+                }
+            )
             Toggle(isOn: $syncScreenAutomatically) {
                 Text("Choose screen automatically")
             }.toggleStyle(.automatic)
                 .onChange(
                     of: syncScreenAutomatically,
-                    { backend.manually_set = syncAutomatically }
+                    {
+                        backend.manually_set = syncAutomatically
+                    }
                 )
             Picker(selection: $chosenScreenHash, label: Text("Chosen Screen")) {
                 ForEach(backend.screens) { screen in
@@ -31,8 +38,12 @@ struct AppBar: View {
             }.disabled(syncScreenAutomatically)
             Divider()
             Button("Sync now") {
-
-            }.keyboardShortcut("S", modifiers: [.shift])
+                Task {
+                    await backend.sync()
+                }
+            }.keyboardShortcut("S", modifiers: [.shift]).disabled(
+                syncAutomatically
+            )
             Button("Quit") {
                 NSApp.terminate(nil)
             }.keyboardShortcut("Q", modifiers: [.command, .shift])

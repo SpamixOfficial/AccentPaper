@@ -13,7 +13,7 @@ struct AppBar: View {
             }.toggleStyle(.automatic).onChange(
                 of: syncAutomatically,
                 {
-                    syncAutomatically ? backend.startJob() : backend.stopJob()
+                    backend.do_not_sync = syncAutomatically
                 }
             )
             Toggle(isOn: $syncScreenAutomatically) {
@@ -22,7 +22,7 @@ struct AppBar: View {
                 .onChange(
                     of: syncScreenAutomatically,
                     {
-                        backend.manually_set = syncAutomatically
+                        backend.manually_set = syncScreenAutomatically
                     }
                 )
             Picker(selection: $chosenScreenHash, label: Text("Chosen Screen")) {

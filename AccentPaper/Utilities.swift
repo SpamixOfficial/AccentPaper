@@ -16,6 +16,7 @@ class AccentBackend: ObservableObject {
     var setting_accent_color: Bool = false
     var timer = Timer()
     var manually_set = false
+    var do_not_sync = false
 
     // dynamic wallpaper specific stuff
     var provider: String?
@@ -232,15 +233,12 @@ class AccentBackend: ObservableObject {
                             self.setActiveScreen()
                         }
                     }
-                    
-                    await self.sync()
+                    if !self.do_not_sync {
+                        await self.sync()
+                    }
                 }
             }
         )
-    }
-
-    func stopJob() {
-        timer.invalidate()
     }
 
     init() {
